@@ -3,15 +3,15 @@ Craft-IT Coding Challenge
 
 ## Short description
 
-There are 2 threads (T1, T2) retrieving news from two different sources (given in CL parameters) from newsapi.org.
-The data from newsapi is stored in a mysql database on http://www.andrejmueller.com.
-A third thread (T3) polls the database for new results and print them to stdout (date-published + title).
+There are 2 threads (T1, T2). They are constantly retrieving news from two different sources (given in CL parameters) from newsapi.org.
+The data from newsapi is stored in a remote mysql database.
+A third thread (T3) polls data from the database and prints it to stdout (date-published + title).
 
 ### T1, T2: 
-Fetching of a JSON block from newsapi.org. In this block are one or more articles. Each thread is parsing all articles and saves them in to a database, if they are not already in the database. This happens every 5 seconds.
+They are fetching a JSON block from newsapi.org. This block contains one or more articles. Each thread is parsing all articles and saves them in to a database, if they are not already stored in the database. This happens every 5 seconds.
 
 ### T3:
-This thread looks into the database every 5 seconds. If there is a new entry (new id in database), he will print it to stdout.
+This thread looks up the database every 5 seconds. If there is a new entry, he will print it to stdout.
 
 ## The database table 
 5 columns:
@@ -20,7 +20,6 @@ This thread looks into the database every 5 seconds. If there is a new entry (ne
 - title - the title of a news article
 - published - the publish date of the article
 - url - the url to the article
-
 
 ## Usage
 

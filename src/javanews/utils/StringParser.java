@@ -22,6 +22,8 @@ public class StringParser {
       
       // parse the date from the news api json response
       public static Date convertNewsApiDateStringToDate(String date) {
+          if(date == null)
+              return null;
           String year = date.substring(0, 4);
           String month = date.substring(5, 7);
           String day = date.substring(8, 10);

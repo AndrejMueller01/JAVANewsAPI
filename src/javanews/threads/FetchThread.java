@@ -37,9 +37,14 @@ public class FetchThread extends Thread {
             for (int i = 0; i < articlesJsonObject.length(); i++) {
                 JSONObject singleArticleJsonOblect = articlesJsonObject.getJSONObject(i);
                 String title = singleArticleJsonOblect.getString("title");
+                
                 // redundancy check
-                if (dbc.checkNews(source, title)) {                   
-                    String publishedAt = singleArticleJsonOblect.getString("publishedAt");
+                if (dbc.checkNews(source, title)) {   
+                    String publishedAt = null;
+                    try {
+                        publishedAt = singleArticleJsonOblect.getString("publishedAt");
+                    } catch (JSONException ex) {
+                    }
                     Date publishedAtDate = StringParser.convertNewsApiDateStringToDate(publishedAt);
                     String url = singleArticleJsonOblect.getString("url");
                     dbc.postNewsEntry(source, title, publishedAtDate, url );
